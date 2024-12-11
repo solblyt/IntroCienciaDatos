@@ -184,34 +184,38 @@ def std(vals_in):
 
 #funcion de percentiles y rango intercuartil
 def percentiles(vals_in):
-  percentil=[]
-  percentiles=len(vals_in)/100
-  for i in vals_in:
-    percentil.append(i*percentiles)
-  return percentiles
+    """
+    Calcula los percentiles 25 y 75 de una lista de números.
+    """
+    # Usamos numpy para calcular los percentiles 25 y 75
+    p25 = np.percentile(vals_in, 25)
+    p75 = np.percentile(vals_in, 75)
+    return {'25th': p25, '75th': p75}
 
 def iqr(vals_in):
-  """
-  Calcula el rango intercuartil de una lista de numeros
-  elimina y detecta los NANS
-  Parametros
-  ----------
-  vals : list
-    Lista de numeros
-  Retorna
-  -------
-     Rango intercuartil:float
-    Rango
-  """
-  #eliminar los NANs
-  vals=[]
-  for v in vals_in:
-    if math.isfinite(v):
-      vals.append(v)
-
-  iqr=percentiles(vals)[75]-percentiles(vals)[25]
-  return iqr
-
+    """
+    Calcula el rango intercuartil de una lista de números
+    eliminando y detectando los NaNs.
+    
+    Parametros
+    ----------
+    vals_in : list
+        Lista de números.
+    
+    Retorna
+    -------
+    float
+        El rango intercuartil (IQR).
+    """
+    # Eliminar los NaNs
+    vals = [v for v in vals_in if math.isfinite(v)]
+    
+    # Calcular los percentiles 25 y 75
+    percentil_vals = percentiles(vals)
+    
+    # Calcular el IQR
+    iqr_value = percentil_vals['75th'] - percentil_vals['25th']
+    return iqr_value
 def mad(vals_in):
   """
   Calcula la desviacion media absoluta de una lista de numeros
@@ -281,7 +285,7 @@ def correlacion(vals_x,vals_y):
   x=[]
   y=[]
   for i in range(len(vals_x)):
-    if math.isfinite(vlas_x[i]) and math.isfinite(vals_y[i]):
+    if math.isfinite(vals_x[i]) and math.isfinite(vals_y[i]):
       x.append(vals_x[i])
       y.append(vals_y[i]) 
 
