@@ -281,7 +281,7 @@ def correlacion(vals_x,vals_y):
   x=[]
   y=[]
   for i in range(len(vals_x)):
-    if math.isfinite(vlas_x[i] & math.isfinite(vals_y[i]):
+    if math.isfinite(vlas_x[i]) and math.isfinite(vals_y[i]):
       x.append(vals_x[i])
       y.append(vals_y[i]) 
 
