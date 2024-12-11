@@ -114,7 +114,9 @@ def rango(vals_in):
     if math.isfinite(v):
       vals.append(v)
   #determinar maximo y minimo desde 0
-  # forma 2- gues and check adivino luego rectifico
+  minimo = min(vals)
+  maximo = max(vals)
+
   for v in vals:
     if v<minimo:
       minimo=v
@@ -171,13 +173,14 @@ def std(vals_in):
   #eliminamos los valores NANs
   vals=[]
   for v in vals_in:
-    if math in vals_in:
+    if math.isfinite(v):
       vals.append(v)
 
   #estimamos llas desviaciones cuadraticas medias
   dcm=[]
   for v in vals:
-    dcm.append((v-promedio)**2)
+    promedio_val = promedio(vals)  # Calcular el promedio de los valores
+    dcm.append((v - promedio_val) ** 2)
 
   #estimamos la varianza
   varianza=sum(dcm)/len(vals)
@@ -236,7 +239,7 @@ def mad(vals_in):
     if math.isfinite(v):
       vals.append(v)
 
-  mad=sum(abs(vals-promedio(vals)))/len(vals)
+  mad=sum(abs(v-promedio(vals)))/len(vals)
   return mad
 
 
@@ -256,7 +259,7 @@ def covarianza(vals_x,vals_y):
   x=[]
   y=[]
   for i in range(len(vals_x)):
-    if math.isfinite(vlas_x[i]) and math.isfinite(vals_y[i]):
+    if math.isfinite(vals_x[i]) and math.isfinite(vals_y[i]):
       x.append(vals_x[i])
       y.append(vals_y[i]) 
 
