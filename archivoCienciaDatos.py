@@ -43,7 +43,7 @@ def mediana(vals_in):
         mid = len(vals) // 2
         return (vals[mid-1] + vals[mid]) / 2.0
 
-def moda(vals):
+def moda(vals_in):
     """
     Calcula la moda de una lista de numeros
     Parametros
