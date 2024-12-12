@@ -191,18 +191,27 @@ def correlacion(vals_x, vals_y):
 
 def eliminar_nans(vals_in):
     """
-    Elimina los valores NaN de una lista de números.
+    Elimina los valores NaN de una lista de números, asegurándose de que los elementos sean flotantes.
     Parametros
     ----------
     vals_in : list
-        Lista de números que puede contener NaN.
+        Lista de números que puede contener NaN o cadenas de texto.
     Retorna
     -------
     list
-        Lista sin los valores NaN.
+        Lista sin los valores NaN ni los valores no convertibles a float.
     """
-    return [v for v in vals_in if math.isfinite(v)]
-
+    cleaned_vals = []
+    for v in vals_in:
+        try:
+            # Convertir a flotante, y verificar si es un número finito
+            v_float = float(v)
+            if math.isfinite(v_float):
+                cleaned_vals.append(v_float)
+        except ValueError:
+            # Si no se puede convertir a float, simplemente lo descartamos
+            continue
+    return cleaned_vals
 
 
 
