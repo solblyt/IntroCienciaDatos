@@ -13,7 +13,10 @@ def promedio(vals_in):
     Promedio:float
         Promedio de los numeros en la lista
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     return sum(vals) / len(vals)
 
 def mediana(vals_in):
@@ -28,7 +31,10 @@ def mediana(vals_in):
     Mediana:float
         Mediana de los numeros en la lista excluyendo Nans
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     vals.sort()
     
     if len(vals) % 2 != 0:
@@ -49,6 +55,10 @@ def moda(vals):
     Moda: list
         Lista de modas de los numeros en la lista
     """
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     categorias = list(set(vals))
     cuentas = [vals.count(c) for c in categorias]
     
@@ -70,7 +80,10 @@ def rango(vals_in):
     Rango:float
         Rango de los numeros (excluyendo NANs)
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     return max(vals) - min(vals)
 
 def varianza(vals_in):
@@ -86,7 +99,10 @@ def varianza(vals_in):
     Varianza:float
         Varianza de los numeros en la lista
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     prom = promedio(vals)
     return sum((v - prom) ** 2 for v in vals) / len(vals)
 
@@ -103,7 +119,10 @@ def std(vals_in):
     Desviacion estandar:float
         Desviacion estandar de los numeros en la lista
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     var = varianza(vals)
     return math.sqrt(var)
 
@@ -111,6 +130,10 @@ def percentiles(vals_in):
     """
     Calcula los percentiles 25 y 75 de una lista de números.
     """
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     p25 = np.percentile(vals_in, 25)
     p75 = np.percentile(vals_in, 75)
     return {'25th': p25, '75th': p75}
@@ -127,7 +150,10 @@ def iqr(vals_in):
     float
         El rango intercuartil (IQR).
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     percentil_vals = percentiles(vals)
     return percentil_vals['75th'] - percentil_vals['25th']
 
@@ -144,7 +170,10 @@ def mad(vals_in):
     Desviacion media absoluta:float
         Desviacion media absoluta de los numeros en la lista
     """
-    vals = [v for v in vals_in if math.isfinite(v)]
+    vals = []
+    for i in vals_in:
+        if i == i:
+            vals.append(i)
     prom = promedio(vals)
     return sum(abs(v - prom) for v in vals) / len(vals)
 
@@ -187,32 +216,6 @@ def correlacion(vals_x, vals_y):
     std_y = std(vals_y)
     
     return covar / (std_x * std_y)
-
-
-def eliminar_nans(vals_in):
-    """
-    Elimina los valores NaN de una lista de números, asegurándose de que los elementos sean flotantes.
-    Parametros
-    ----------
-    vals_in : list
-        Lista de números que puede contener NaN o cadenas de texto.
-    Retorna
-    -------
-    list
-        Lista sin los valores NaN ni los valores no convertibles a float.
-    """
-    cleaned_vals = []
-    for v in vals_in:
-        try:
-            # Convertir a flotante, y verificar si es un número finito
-            v_float = float(v)
-            if math.isfinite(v_float):
-                cleaned_vals.append(v_float)
-        except ValueError:
-            # Si no se puede convertir a float, simplemente lo descartamos
-            continue
-    return cleaned_vals
-
 
 
 
