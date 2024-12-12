@@ -189,7 +189,19 @@ def correlacion(vals_x, vals_y):
     return covar / (std_x * std_y)
 
 
-
+def eliminar_nans(vals_in):
+    """
+    Elimina los valores NaN de una lista de números.
+    Parametros
+    ----------
+    vals_in : list
+        Lista de números que puede contener NaN.
+    Retorna
+    -------
+    list
+        Lista sin los valores NaN.
+    """
+    return [v for v in vals_in if math.isfinite(v)]
 
 
 
